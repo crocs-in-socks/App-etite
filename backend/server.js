@@ -1,13 +1,17 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
 const {signup, login} = require('./routers/userRouter')
+const jwt = require('jsonwebtoken');
+
 //const cors = require('cors');
 
 
 
 const app = express()
 app.use(bodyParser.json());
+app.use(cookieParser())
 //app.use(cors());
 mongoose.connect("mongodb://127.0.0.1:27017/Appetite")
 
@@ -27,6 +31,9 @@ const verifyToken = (req, res, next) => {
         next();
     });
 };
+app.get('/checkjwt',verifyToken,(req,res)=>{ //Used for client side authentication
+    res.status(200).send()
+})
 
 app.post('/signup',async (req,res)=>{
     try{
