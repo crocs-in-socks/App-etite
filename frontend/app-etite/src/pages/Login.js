@@ -29,6 +29,7 @@ function Login() {
         <input type='text' placeholder='Enter Username' onChange={(e)=>setUsername(e.target.value)}></input>
         <input type='password' placeholder='Enter password' onChange={(e)=>setPassword(e.target.value)}></input>
         <button >Login</button>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </form>
     </div>
   )
