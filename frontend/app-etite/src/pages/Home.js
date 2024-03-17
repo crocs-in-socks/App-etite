@@ -19,6 +19,16 @@ function Home() {
         }
     }
 
+    const sendToBackend = async () => {
+      try {
+        const response = await axios.post('http://127.0.0.1:8000/infer_classifier/', {image: capturedImage})
+        console.log(response)
+      }
+      catch(error) {
+        console.log(error)
+      }
+  }
+
     const [capturedImage, setCapturedImage] = useState(null)
     const handleCapture = (imageData) => {
       setCapturedImage(imageData)
@@ -28,6 +38,7 @@ function Home() {
         <div>Home
             <CameraComponent onCapture={handleCapture} />
             <ImageDisplay imageData={capturedImage} />
+            <button onClick={sendToBackend}>Upload Image</button>
             <button onClick={handleLogout}>Logout</button>
         </div>
   )

@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
+import base64
+from io import BytesIO
+
 import os
 import json
 import torch
@@ -40,13 +43,38 @@ with open(food_map_file_path, 'r') as file:
 
 @csrf_exempt
 def infer_classifier(request):
-    image = request.FILES['image']
-    image = Image.open(image).convert('RGB')
-    image = transform(image).unsqueeze(0)
 
-    with torch.no_grad():
-        image = image.to(DEVICE).float()
-        prediction = model(image)
-        prediction_id = torch.argmax(prediction).item()
-        prediction = id_map[str(prediction_id)]
-        return JsonResponse({'prediction': prediction})
+    if request.content_type != 'application/json':
+        image = request.FILES['image']
+        image = Image.open(image).convert('RGB')
+        image = transform(image).unsqueeze(0)
+
+        with torch.no_grad():
+            image = image.to(DEVICE).float()
+            prediction = model(image)
+            prediction_id = torch.argmax(prediction).item()
+            prediction = id_map[str(prediction_id)]
+            return JsonResponse({'prediction': prediction})
+
+    else:
+        data = json.loads(request.body)
+        base64_image_data = data['image']
+        prefix = "data:image/png;base64,"
+        base64_image_data = base64_image_data[len(prefix):]
+
+        missing_padding = len(base64_image_data) % 4
+        if missing_padding != 0:
+            base64_image_data += '=' * (4 - missing_padding)
+
+        image_data = base64.b64decode(base64_image_data)
+        with BytesIO(image_data) as image_buffer:
+            with Image.open(image_buffer) as image:
+                image = image.convert('RGB')
+                image = transform(image).unsqueeze(0)
+
+                with torch.no_grad():
+                    image = image.to(DEVICE).float()
+                    prediction = model(image)
+                    prediction_id = torch.argmax(prediction).item()
+                    prediction = id_map[str(prediction_id)]
+                    return JsonResponse({'prediction': prediction})
