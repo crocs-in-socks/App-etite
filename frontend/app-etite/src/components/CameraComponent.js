@@ -1,34 +1,52 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 
 function CameraComponent({onCapture}) {
-    const handleTakePicture = async () => {
+    const [stream, setStream] = useState(null)
+    const [showStartButton, setShowStartButton] = useState(true)
+    const videoRef = useRef()
+
+    const startCamera = async () => {
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({video: true})
-            const videoElement = document.createElement('video')
-            document.body.appendChild(videoElement)
-            videoElement.srcObject = stream
-            videoElement.play()
-
-            const canvas = document.createElement('canvas')
-            canvas.width = videoElement.width
-            canvas.height = videoElement.height
-            const context = canvas.getContext('2d')
-            context.drawImage(videoElement, 0, 0, canvas.width, canvas.height)
-
-            const imageData = canvas.toDataURL('image/png')
-            onCapture(imageData)
-
-            videoElement.srcObject.getVideoTracks().forEach(track => track.stop())
-            document.body.removeChild(videoElement)
+            const userMediaStream = await navigator.mediaDevices.getUserMedia({ video: {facingMode: {ideal: 'environment'}} })
+            setStream(userMediaStream)
+            setShowStartButton(false)
+            onCapture(null)
+            if (videoRef.current) {
+                videoRef.current.srcObject = userMediaStream;
+            }
+        } catch (error) {
+          console.error('Error accessing camera:', error)
         }
-        catch (error) {
-            console.error('Error accessing camera:', error)
+    }
+
+    const stopCamera = () => {
+        if (stream) {
+          stream.getTracks().forEach(track => track.stop())
+          setStream(null)
+          setShowStartButton(true)
         }
+    }
+
+    const takePicture = async () => {
+        if (!stream || !videoRef.current)
+            return
+    
+        const video = videoRef.current
+        const canvas = document.createElement('canvas')
+        canvas.width = video.videoWidth
+        canvas.height = video.videoHeight
+        const context = canvas.getContext('2d')
+        context.drawImage(video, 0, 0, canvas.width, canvas.height)
+        const imageData = canvas.toDataURL('image/png')
+        onCapture(imageData)
+        stopCamera()
     }
 
     return (
         <div>
-            <button onClick={handleTakePicture}>Take Picture</button>
+            {showStartButton && <button onClick={startCamera}>Start Camera</button>}
+            {stream && <button onClick={takePicture}>Take Picture</button>}
+            <video ref={videoRef} autoPlay playsInline muted style={{ display: stream ? 'block' : 'none' }}/>
         </div>
     )
 }
