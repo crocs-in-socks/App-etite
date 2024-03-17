@@ -1,12 +1,17 @@
 const express = require("express")
 const mongoose = require("mongoose")
+const bodyParser = require('body-parser');
 const {signup, login} = require('./routers/userRouter')
+//const cors = require('cors');
+
 
 
 const app = express()
+app.use(bodyParser.json());
+//app.use(cors());
 mongoose.connect("mongodb://127.0.0.1:27017/Appetite")
 
-app.get('/', (req, res) => res.send("hello, world!"))
+//app.get('/', (req, res) => res.send("hello, world!"))
 
 const verifyToken = (req, res, next) => {
     const token = req.cookies.jwtToken;
@@ -26,7 +31,6 @@ const verifyToken = (req, res, next) => {
 app.post('/signup',async (req,res)=>{
     try{
         const { username, password } = req.body;
-
         await signup(username, password);
         res.status(200).send('Signup successful');
     }
@@ -35,6 +39,7 @@ app.post('/signup',async (req,res)=>{
         res.status(400).send(e.message)
     }
 })
+
 app.post('/login', async (req, res) => {
     try {
         res.clearCookie('jwtToken', { path: '/' });
@@ -53,4 +58,4 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.listen(3000, () => console.log("Server listening on http://localhost:3000"))
+app.listen(5000, () => console.log("Server listening on http://localhost:5000"))

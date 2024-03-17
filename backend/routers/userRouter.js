@@ -9,6 +9,7 @@ const signup = async (username, password) => {
         throw new Error("Username is already in use")
     }
     const hashedPassword = await bcrypt.hash(password,8)
+    console.log(hashedPassword)
     const newUser = new User({
         username, password: hashedPassword
     })
