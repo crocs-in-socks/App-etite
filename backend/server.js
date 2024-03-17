@@ -64,5 +64,9 @@ app.post('/login', async (req, res) => {
         res.status(400).send(e.message);
     }
 });
+app.post('/logout',(req,res)=>{
+    res.clearCookie('jwtToken', { path: '/' });
+    res.status(200).send()
+})
 
 app.listen(5000, () => console.log("Server listening on http://localhost:5000"))
