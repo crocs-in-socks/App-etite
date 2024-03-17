@@ -13,7 +13,7 @@ const app = express()
 app.use(bodyParser.json());
 app.use(cookieParser())
 //app.use(cors());
-mongoose.connect("mongodb://127.0.0.1:27017/Appetite")
+mongoose.connect("mongodb+srv://taskapp:elgato@cluster0.fjdpkwi.mongodb.net/appetite")
 
 //app.get('/', (req, res) => res.send("hello, world!"))
 
