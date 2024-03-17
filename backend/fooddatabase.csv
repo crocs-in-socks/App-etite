@@ -1,0 +1,4 @@
+,vegetarian,Sweet,Savory,Spicy,Baked,Fried,Hot,High protein,Low fat
+Ice cream,True,True,False,False,False,False,False,False,False
+burger,False,False,True,False,False,True,True,True,False
+pizza,True,False,True,False,True,False,True,False,False
