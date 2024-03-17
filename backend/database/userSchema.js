@@ -10,6 +10,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 6
+    },
+    calorieGoal: {
+        type: Number,
+        default: 2000
     }
 })
 

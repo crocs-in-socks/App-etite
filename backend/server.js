@@ -7,6 +7,7 @@ require('dotenv').config()
 
 const {signup, login} = require('./routers/userRouter')
 const {getNutrition} = require('./routers/externalapi')
+const {updateCalories, getTodaysCalories, updateCalorieGoal, getCalorieGoal} = require('./routers/calorieRouter')
 
 //const cors = require('cors');
 
@@ -53,6 +54,11 @@ app.post('/calories', verifyToken, async(req,res) => {
     try{
         const {foodConsumed} = req.body
         const response = await getNutrition(foodConsumed)
+
+        //console.log(response.items[0].calories)
+        const userId = req.userId
+        await updateCalories(userId, response.items[0].calories)
+
         res.status(200).json(response.items)
         //console.log(response.items)
     }
@@ -61,6 +67,46 @@ app.post('/calories', verifyToken, async(req,res) => {
         res.status(400).send(e.message)
     }
 })
+app.get('/calories',verifyToken, async (req,res) => {
+    try{
+        
+        const userId = req.userId
+        const response = await getTodaysCalories(userId)
+        console.log(response)
+        res.status(200).json({calories: response})
+    }
+    catch(e)
+    {
+        res.status(400).send(e.message)
+    }
+})
+app.patch('/caloriegoal',verifyToken, async(req,res)=>{
+    try{
+        const userId = req.userId
+        const {calorieGoal} = req.body
+        //console.log(calorieGoal)
+
+        await updateCalorieGoal(userId, calorieGoal)
+        res.status(200).send()
+    }
+    catch(e)
+    {
+        res.status(400).send(e.message)
+    }
+})
+app.get('/caloriegoal',verifyToken, async(req,res)=>{
+    try{
+        const userId = req.userId
+        const response = await getCalorieGoal(userId)
+        console.log(response)
+        res.status(200).json(response)
+    }
+    catch(e)
+    {
+        res.status(400).send(e.message)
+    }
+})
+
 
 app.post('/login', async (req, res) => {
     try {
