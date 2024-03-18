@@ -1,0 +1,65 @@
+.nutritional-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.back-button {
+	margin-top: 1rem;
+}
+
+.nutritional-info h1 {
+	margin-bottom: 1rem;
+}
+
+.food-image {
+	max-width: 475px;
+	border-radius: 12px;
+	border: 3px solid var(--border-color);
+}
+
+.responsive-left-right {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5rem;
+}
+
+.food-properties-group {
+	margin-top: 0.5rem;
+	margin-left: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	gap: 0.1rem;
+}
+
+.food-properties-group span {
+	font-weight: 600;
+}
+
+@media (max-width: 1220px) {
+	.nutritional-info h1 {
+		margin-top: 1rem;
+		margin-bottom: 0.5rem;
+		font-size: var(--h4-font);
+	}
+
+	.food-image {
+		max-width: 375px;
+	}
+
+	.responsive-left-right {
+		gap: 1rem;
+	}
+
+	.food-title {
+		text-align: center;
+	}
+
+	.food-properties-group {
+		margin-left: 0;
+		text-align: center;
+	}
+}
