@@ -21,8 +21,9 @@ function CalorieHistoryCard({food}) {
   },[])
 
   return (
-    <div>
-        <p>{food}  {calories}</p>
+    <div className="eaten-group">
+        <p>{food}</p>
+		<p>{calories} kcal</p>
     </div>
   )
 }

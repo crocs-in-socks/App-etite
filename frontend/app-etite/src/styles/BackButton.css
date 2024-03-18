@@ -15,3 +15,7 @@
 .back-button:hover {
 	cursor: pointer;
 }
+
+.back-button:active {
+	transform: scale(0.99);
+}

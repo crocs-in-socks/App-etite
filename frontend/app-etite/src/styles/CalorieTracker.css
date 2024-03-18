@@ -1,0 +1,123 @@
+.calorie-tracker {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 1rem;
+}
+
+.responsive-left-right {
+	/* border: 1px solid hotpink; */
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-width: 90%;
+	margin-top: 1rem;
+}
+
+@media (max-width: 1220px) {
+	.responsive-left-right {
+		flex-direction: column;
+	}
+}
+
+.back-button {
+	align-self: left;
+}
+
+.calorie-box {
+	background-image: var(--accent-gradient);
+	padding: 1rem 1rem;
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 25rem;
+	align-self: center;
+}
+
+.calorie-box__calories {
+	font-size: 3rem;
+	font-weight: 600
+}
+
+.calorie-box__goal {
+	font-size: 2rem;
+	font-weight: 500;
+	margin-left: 0.2rem;
+}
+
+.calorie-box__units {
+	font-size: 1.2rem;
+	font-weight: 500;
+	margin-left: 0.2rem;
+}
+
+.goal-text {
+	margin-top: 0.8rem;
+	margin-bottom: 1rem;
+	font-weight: 500;
+	text-align: center;
+}
+
+.add-manual-container, .update-goal-container {
+	margin: 0.5rem 0rem;
+}
+
+#input-small, #input-small-2 {
+	padding: 0.6rem 0.9rem;
+}
+
+.add-manual, .update-goal {
+	margin-left: 0.4rem;
+}
+
+.button-disabled {
+	background: none;
+	background-color: grey;
+}
+
+.button-disabled:hover {
+	cursor: wait;
+}
+
+.eaten-container {
+	margin-top: 0.4rem;
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	gap: 0.5rem;
+
+	margin-left: 1.5rem;
+}
+
+.eaten-subtitle {
+	margin-top: 1rem;
+}
+
+.eaten-group {
+	background-color: var(--background-color-light);
+	border-radius: 12px;
+	max-width: 20rem;
+
+	padding: 0.4rem 1rem;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+@media (max-width: 1200px) {
+	#input-small-2 {
+		width: 14.6rem;
+	}
+
+	.calorie-tracker h1 {
+		margin-top: 1.5rem;
+		font-size: var(--h3-font);
+	}
+
+	.eaten-subtitle {
+		font-size: var(--h5-font);
+		text-align: center;
+	}
+}
