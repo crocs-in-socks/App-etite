@@ -169,14 +169,6 @@ app.get('/caloriegoal',verifyToken, async(req,res)=>{
 app.get('/recipe',verifyToken, async(req,res)=>{
     try{
         const q = req.query.q
-
-        // const response = await axios.get('https://api.spoonacular.com/recipes/findByIngredients',{
-        //     params: {
-        //         ingredients : q,
-        //         apiKey: process.env.SPOONACULAR_API,
-        //         number: 5
-        //     }
-        // })
         const response = await axios.get('https://api.edamam.com/api/recipes/v2',{
             params: {
                 type: 'public',
