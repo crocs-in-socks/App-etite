@@ -2,6 +2,9 @@ import React,{ useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
+import "../styles/Login.css"
+import BackButton from "../components/BackButton.js"
+
 function Login() {
 
   const navigate = useNavigate()
@@ -25,14 +28,17 @@ function Login() {
   }
 
   return (
-    <div>
+    <div className="responsive-container login-form">
+		<BackButton />
 
-      <form onSubmit={handleSubmit}>
-        <input type='text' placeholder='Enter Username' onChange={(e)=>setUsername(e.target.value)}></input>
-        <input type='password' placeholder='Enter password' onChange={(e)=>setPassword(e.target.value)}></input>
-        <button >Login</button>
-      </form>
-    </div>
+		<h1 className="h2-sizing gradient-text">Login to App-etite</h1>
+
+		<form className="login-form__form" onSubmit={handleSubmit}>
+			<input type='text' placeholder='username' onChange={(e)=>setUsername(e.target.value)}></input>
+			<input type='password' placeholder='password' onChange={(e)=>setPassword(e.target.value)}></input>
+			<button className="gradient-button login-button" >Login to App-etite</button>
+		</form>
+	</div>
   )
 }
 
