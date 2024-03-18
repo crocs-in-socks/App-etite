@@ -6,8 +6,9 @@ function CalorieHistoryCard({date, calories}) {
   const formattedDate = new Date(date).toLocaleDateString('en-US', options);
 
   return (
-    <div>
-        <p>{formattedDate}  {calories}</p>
+    <div className="eaten-group">
+        <p>{formattedDate}</p>
+		<p>{calories} kcal</p>
     </div>
   )
 }

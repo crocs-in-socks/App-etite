@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react'
 import axios from 'axios'
 
+import BackButton from "../components/BackButton.js"
+import "../styles/Signup.css"
+
 function SignUp() {
 
   const navigate = useNavigate()
@@ -40,17 +43,17 @@ function SignUp() {
   }
 
   return (
-    <div>
-        <form onSubmit={handleSubmit}>
-            <input placeholder='Enter username: ' onChange={(e)=>setUsername(e.target.value)}></input>
-            <input placeholder='Enter password: ' onChange={(e)=>setPassword(e.target.value)}></input>
-            <input placeholder='Re-enter password: 'onChange={(e)=>setRepassword(e.target.value)}></input>
-            <button type='submit'>Signup</button>
+    <div className="responsive-container signup-form">
+		<BackButton />
+
+		<h1 className="h2-sizing gradient-text">Sign up for App-etite</h1>
+
+        <form onSubmit={handleSubmit} className="signup-form__form">
+            <input type="text" placeholder="username" onChange={(e)=>setUsername(e.target.value)}></input>
+            <input type="password" placeholder="password" onChange={(e)=>setPassword(e.target.value)}></input>
+            <input type="password" placeholder='re-enter password'onChange={(e)=>setRepassword(e.target.value)}></input>
+            <button className="gradient-button" type='submit'>Signup</button>
         </form>
-        <button onClick={async ()=>{
-          const response = await axios.get('/test')
-          console.log(response)
-        }}>Test</button>
     </div>
   )
 }

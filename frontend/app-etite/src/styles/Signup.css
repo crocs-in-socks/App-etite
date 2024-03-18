@@ -1,4 +1,4 @@
-.login-form {
+.signup-form {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -9,7 +9,7 @@
 	min-height: 70dvh;
 }
 
-.login-form h1 {
+.signup-form h1 {
 	padding-top: 3rem;
 }
 
@@ -17,7 +17,7 @@
 	align-self: flex-start;
 }
 
-.login-form__form {
+.signup-form__form {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -27,7 +27,7 @@
 }
 
 @media (max-width: 1200px) {
-	.login-form h1 {
+	.signup-form h1 {
 		font-size: 2.074rem;
 	}
 }
