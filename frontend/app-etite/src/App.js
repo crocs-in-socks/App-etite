@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import CalorieTracker from './pages/CalorieTracker';
 import ProtectedRoute from './ProtectedRoute';
 import NutritionalPage from './pages/NutritionalPage';
+import RecipePage from './pages/RecipePage';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signup" element={<SignUp/>} />
           <Route path="/home" element={<ProtectedRoute>  <Home/>   </ProtectedRoute>}  />
           <Route path="/track" element={<ProtectedRoute>  <CalorieTracker/>   </ProtectedRoute>}  />
+          <Route path="/recipe/:query" element={<ProtectedRoute>  <RecipePage/>   </ProtectedRoute>}  />
           <Route path="/nutrition/:food" element={<ProtectedRoute>  <NutritionalPage/>   </ProtectedRoute>}  />
           
         </Routes>

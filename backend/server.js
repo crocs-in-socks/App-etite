@@ -74,7 +74,7 @@ app.get('/imagesearch',verifyToken,async (req,res) => {
         const api = process.env.PIXABAYAPI
         
         const URL = "https://pixabay.com/api/?key="+api+"&q="+encodeURIComponent(food)
-        console.log(URL)
+        //console.log(URL)
         const response = await axios.get(URL)
         res.status(200).json(response.data.hits[0].webformatURL)
     }
@@ -164,6 +164,32 @@ app.get('/caloriegoal',verifyToken, async(req,res)=>{
     catch(e)
     {
         res.status(400).send(e.message)
+    }
+})
+app.get('/recipe',verifyToken, async(req,res)=>{
+    try{
+        const q = req.query.q
+
+        // const response = await axios.get('https://api.spoonacular.com/recipes/findByIngredients',{
+        //     params: {
+        //         ingredients : q,
+        //         apiKey: process.env.SPOONACULAR_API,
+        //         number: 5
+        //     }
+        // })
+        const response = await axios.get('https://api.edamam.com/api/recipes/v2',{
+            params: {
+                type: 'public',
+                q: q,
+                app_id: process.env.EDAMAME_APPID,
+                app_key: process.env.EDAMAME_KEY,
+            }
+        })
+
+        console.log(response.data.hits)
+    }catch(e)
+    {
+        console.log(e.message)
     }
 })
 
