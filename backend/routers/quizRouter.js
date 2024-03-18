@@ -40,7 +40,7 @@ const getNextQuestion = async (criteriaArray) => {
 
         const numFoods = Object.keys(filteredData).length
 
-        if(numFoods <= 3) {
+        if(numFoods <= 1) {
             const values = Object.values(filteredData)
             let suggestions = []
             for(const value in values) {
@@ -75,7 +75,7 @@ const getNextQuestion = async (criteriaArray) => {
             }
         }
 
-        return {nextquestion: minAttr, done: false, suggestions: null}
+        return {nextquestion: minAttr, done: false, suggestions: []}
     }
     catch(error) {
         console.error('Error loading database:', error)

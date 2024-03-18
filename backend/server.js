@@ -205,6 +205,7 @@ app.get('/recipe',verifyToken, async(req,res)=>{
     }catch(e)
     {
         res.status(400).send()
+        console.log(e.message)
     }
 })
 
@@ -212,7 +213,6 @@ app.get('/getnextquestion', verifyToken, async(req, res)=>{
     try {
         const answers = req.query.answers
         const response = await getNextQuestion(answers)
-        console.log(response)
         res.status(200).json(response)
     }
     catch(e) {

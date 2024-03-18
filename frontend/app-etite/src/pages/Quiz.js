@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 function Quiz() {
+
     const [question, setQuestion] = useState(null)
     const [currQid, setCurrQid] = useState('is_vegetarian')
     const [qids, setQids] = useState([])
@@ -27,55 +28,58 @@ function Quiz() {
         is_chewy: 'is_chewy',
         is_traditional: 'is_traditional',
         is_fusion: 'is_fusion',
-        done: 'Quiz finished' 
+        done: 'These are your suggestions!' 
     }
 
     const handleTrue = async() => {
         qids.push({ [currQid]: '1' })
         setQids([...qids])
+
         const response = await axios.get('/getnextquestion', {params:{answers: qids}})
+        const nextqid = response.data.nextquestion
+        const done = response.data.done
+        const response_suggestions = response.data.suggestions
+        
+        setCurrQid(nextqid)
+        setIsDone(done)
+        setSuggestions(response_suggestions)
 
-        setIsDone(response.data.done)
-        if(isDone) {
-            setSuggestions(response.data.suggestions)
-        }
-
-        console.log(suggestions)
-
-        setCurrQid(response.data.nextquestion)
-        const nextquestion = question_map[currQid]
-        setQuestion(nextquestion)
+        // console.log(currQid)
+        // console.log(isDone)
+        // console.log(suggestions)
     }
+
 
     const handleFalse = async() => {
         qids.push({ [currQid]: '0' })
         setQids([...qids])
+
         const response = await axios.get('/getnextquestion', {params:{answers: qids}})
+        const nextqid = response.data.nextquestion
+        const done = response.data.done
+        const response_suggestions = response.data.suggestions
+        
+        setCurrQid(nextqid)
+        setIsDone(done)
+        setSuggestions(response_suggestions)
 
-        setIsDone(response.data.done)
-        if(isDone) {
-            setSuggestions(response.data.suggestions)
-        }
-
-        console.log(suggestions)
-
-        setCurrQid(response.data)
-        const nextquestion = question_map[currQid]
-        setQuestion(nextquestion)
+        // console.log(currQid)
+        // console.log(isDone)
+        // console.log(suggestions)
     }
 
     useEffect(() => {
         const nextquestion = question_map[currQid]
         setQuestion(nextquestion)
-    }, [])
+    }, [currQid])
 
     return (
       <div>
-          {!isDone && <p>Question</p>}
-          {!isDone && <p>{question}</p>}
+          <p>Question</p>
+          <p>{question}</p>
           {!isDone && <button onClick={handleTrue}>Yes</button>}
           {!isDone && <button onClick={handleFalse}>No</button>}
-          {<p>{suggestions}</p>}
+          <p>{suggestions}</p>
       </div>
     )
 }
