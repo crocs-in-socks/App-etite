@@ -8,6 +8,7 @@ require('dotenv').config()
 const {signup, login} = require('./routers/userRouter')
 const {getNutrition} = require('./routers/externalapi')
 const {updateCalories, getTodaysCalories, updateCalorieGoal, getCalorieGoal, getCalorieHistory} = require('./routers/calorieRouter')
+const {getNextQuestion} = require('./routers/quizRouter')
 
 //const cors = require('cors');
 
@@ -129,6 +130,17 @@ app.get('/caloriegoal',verifyToken, async(req,res)=>{
     }
 })
 
+app.get('/getnextquestion', verifyToken, async(req, res)=>{
+    try {
+        const answers = req.query.answers
+        const response = await getNextQuestion(answers)
+        console.log(response)
+        res.status(200).json(response)
+    }
+    catch(e) {
+        res.status(400).send(e.message)
+    }
+})
 
 app.post('/login', async (req, res) => {
     try {
