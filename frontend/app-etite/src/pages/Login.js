@@ -1,7 +1,10 @@
 import React,{ useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
 function Login() {
+
+  const navigate = useNavigate()
 
   const [username,setUsername] = useState('')
   const [password,setPassword] = useState('')
@@ -13,8 +16,7 @@ function Login() {
         const response = await axios.post('/login', data);
         if(response.status===200)
         {
-          alert('successfully logged in')
-          //navigate('/home')
+          navigate('/home')
         }
     }catch(error){
         alert(error.response.data)
