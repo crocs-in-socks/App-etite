@@ -3,10 +3,12 @@ import React, { useState, useRef } from 'react'
 function CameraComponent({onCapture}) {
     const [stream, setStream] = useState(null)
     const [showStartButton, setShowStartButton] = useState(true)
+	const [videoOn, setVideoOn] = useState(false)
     const videoRef = useRef()
 
     const startCamera = async () => {
         try {
+			setVideoOn(prev => !prev)
             const userMediaStream = await navigator.mediaDevices.getUserMedia({ video: {facingMode: {ideal: 'environment'}} })
             setStream(userMediaStream)
             setShowStartButton(false)
@@ -42,11 +44,19 @@ function CameraComponent({onCapture}) {
         stopCamera()
     }
 
+	function renderVideoStream() {
+		if (videoOn)
+			return <video className="videostream" ref={videoRef} autoPlay playsInline muted style={{ display: stream ? 'block' : 'none' }}/>
+
+		else
+			return <div className="greybox">Upload a food image!</div>
+	}
+
     return (
-        <div>
-            {showStartButton && <button onClick={startCamera}>Start Camera</button>}
-            {stream && <button onClick={takePicture}>Take Picture</button>}
-            <video ref={videoRef} autoPlay playsInline muted style={{ display: stream ? 'block' : 'none' }}/>
+        <div className="camera-button-group">
+            {renderVideoStream()}
+			{showStartButton && <button className="gradient-button" onClick={startCamera}>Open Camera</button>}
+			{stream && <button className="gradient-button" onClick={takePicture}>Take Picture</button>}
         </div>
     )
 }

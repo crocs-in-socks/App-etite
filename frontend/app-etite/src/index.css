@@ -91,6 +91,19 @@ input[type="password"] {
 	transform: scale(0.99);
 }
 
+.large-gradient-button {
+	padding: 0.5rem 1.5rem;
+	border-radius: 12px;
+	font-weight: 600;
+	color: var(--text-white);
+	border: none;
+	background-image: var(--accent-gradient);
+	background-size: 300%;
+	background-position: left;
+	transition: background-position 1s;
+	font-size: 1.8rem;
+}
+
 .highlight-green {
 	color: #089000;
 }

@@ -29,7 +29,7 @@ function Login() {
 
   return (
     <div className="responsive-container login-form">
-		<BackButton />
+		{/* <BackButton /> */}
 
 		<h1 className="h2-sizing gradient-text">Login to App-etite</h1>
 

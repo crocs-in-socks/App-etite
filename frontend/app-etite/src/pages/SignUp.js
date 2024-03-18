@@ -44,7 +44,7 @@ function SignUp() {
 
   return (
     <div className="responsive-container signup-form">
-		<BackButton />
+		{/* <BackButton /> */}
 
 		<h1 className="h2-sizing gradient-text">Sign up for App-etite</h1>
 

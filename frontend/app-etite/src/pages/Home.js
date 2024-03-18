@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import CameraComponent from '../components/CameraComponent'
 import ImageDisplay from '../components/ImageDisplay'
 
+import "../styles/Home.css"
+
 function Home() {
 
     const [search,setSearch] = useState('food')
@@ -46,22 +48,40 @@ function Home() {
       navigate('/recipe/' + searchRecipes)
     }
 
+	function uploadImageButton() {
+		return <button className="gradient-button" onClick={sendToBackend}>Upload Image</button>
+	}
+
     return (
-        <div>Home
-            <CameraComponent onCapture={handleCapture} />
-            <ImageDisplay imageData={capturedImage} />
-            <button onClick={sendToBackend}>Upload Image</button>
-            <button onClick={handleLogout}>Logout</button>
-            <p>Looking for Nutritional Info?</p>
-            <form onSubmit={routeToNutrition}>
-              <input placeholder='Search for specific food...' onChange={(e) => setSearch(e.target.value)}></input>
-              <button type='submit'>search</button>
-            </form>
-            <p>Looking for recipes?</p>
-            <form onSubmit={routeToRecipe}>
-              <input placeholder='Enter space separated ingredients..' onChange={(e) => setSearchRecipes(e.target.value)}></input>
-              <button type='submit'>search</button>
-            </form>
+        <div className="responsive-container homepage">
+			<div className="header-group">
+				<h1 className="h2-sizing gradient-text">App-etite</h1>
+				<a className="logout-button" onClick={handleLogout}>Logout</a>
+			</div>
+			
+			<div className="homepage-info-container">
+
+			
+			<div className="homepage-info-left">	
+				<CameraComponent onCapture={handleCapture} />
+				<ImageDisplay imageData={capturedImage} />
+				{uploadImageButton()}
+			</div>
+            
+            <div className="homepage-info-right">
+				<p>Looking for Nutritional Info?</p>
+				<form onSubmit={routeToNutrition}>
+				<input placeholder='Search for specific food' onChange={(e) => setSearch(e.target.value)}></input>
+				<button type='submit'>search</button>
+				</form>
+				<p>Looking for recipes?</p>
+				<form onSubmit={routeToRecipe}>
+				<input placeholder='Enter space separated ingredients' onChange={(e) => setSearchRecipes(e.target.value)}></input>
+				<button type='submit'>search</button>
+				</form>
+			</div>
+            
+			</div>
         </div>
   )
 }
