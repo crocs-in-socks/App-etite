@@ -41,6 +41,10 @@ function Home() {
       e.preventDefault()
       navigate('/nutrition/' + search)
     }
+    const routeToRecipe = (e) => {
+      e.preventDefault()
+      navigate('/recipe/' + searchRecipes)
+    }
 
     return (
         <div>Home
@@ -54,8 +58,8 @@ function Home() {
               <button type='submit'>search</button>
             </form>
             <p>Looking for recipes?</p>
-            <form>
-              <input placeholder='Enter comma seperated value: chicken,broccoli,rice...' onChange={(e) => setSearchRecipes(e.target.value)}></input>
+            <form onSubmit={routeToRecipe}>
+              <input placeholder='Enter space separated ingredients..' onChange={(e) => setSearchRecipes(e.target.value)}></input>
               <button type='submit'>search</button>
             </form>
         </div>

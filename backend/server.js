@@ -186,10 +186,24 @@ app.get('/recipe',verifyToken, async(req,res)=>{
             }
         })
 
-        console.log(response.data.hits)
+
+        const firstFiveHits = response.data.hits.slice(0, 5)
+        //console.log(firstFiveHits[0].recipe)
+        const newArray = []
+        firstFiveHits.map((item) => {
+            const newObj = {
+                label : item.recipe.label,
+                image : item.recipe.image,
+                recipe: item.recipe.ingredientLines.join()
+            }
+            newArray.push(newObj)
+        })
+        //console.log(newArray)
+
+        res.status(200).json(newArray)
     }catch(e)
     {
-        console.log(e.message)
+        res.status(400).send()
     }
 })
 
