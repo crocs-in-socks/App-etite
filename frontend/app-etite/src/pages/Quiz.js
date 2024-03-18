@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 function Quiz() {
+
+    const navigate = useNavigate()
 
     const [question, setQuestion] = useState(null)
     const [currQid, setCurrQid] = useState('is_vegetarian')
@@ -72,6 +75,13 @@ function Quiz() {
         const nextquestion = question_map[currQid]
         setQuestion(nextquestion)
     }, [currQid])
+
+    useEffect(()=>{
+        if(isDone)
+        {
+            navigate('/nutrition/' + suggestions[0])
+        }
+    },[isDone])
 
     return (
       <div>
