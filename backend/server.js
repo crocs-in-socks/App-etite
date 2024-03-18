@@ -7,7 +7,7 @@ require('dotenv').config()
 
 const {signup, login} = require('./routers/userRouter')
 const {getNutrition} = require('./routers/externalapi')
-const {updateCalories, getTodaysCalories, updateCalorieGoal, getCalorieGoal} = require('./routers/calorieRouter')
+const {updateCalories, getTodaysCalories, updateCalorieGoal, getCalorieGoal, getCalorieHistory} = require('./routers/calorieRouter')
 
 //const cors = require('cors');
 
@@ -74,6 +74,28 @@ app.get('/calories',verifyToken, async (req,res) => {
         const response = await getTodaysCalories(userId)
         console.log(response)
         res.status(200).json({calories: response})
+    }
+    catch(e)
+    {
+        res.status(400).send(e.message)
+    }
+})
+app.get('/foodcalorie',verifyToken,async(req,res) => {
+    try{
+        const food = req.query.food
+        const response = await getNutrition(food)
+        res.status(200).json(response.items[0].calories)
+    }
+    catch(e)
+    {
+        res.status(400).send(e.message)
+    }
+})
+app.get('/caloriehistory',verifyToken,async(req,res)=>{
+    try{
+        const userId = req.userId
+        const response = await getCalorieHistory(userId)
+        res.status(200).json(response)
     }
     catch(e)
     {

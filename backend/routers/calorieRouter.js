@@ -11,6 +11,15 @@ const updateCalorieGoal = async (userId, goal) => {
     user.calorieGoal = goal
     await user.save()
 }
+const getCalorieHistory = async(userId) => {
+    const calorie = await Calories.find({owner: userId})
+    if(!calorie)
+    {
+        throw new Error("User doesn't exist or has no history.")
+    }
+    return calorie
+
+}
 const getCalorieGoal = async (userId) => {
     const user = await User.findById(userId)
     if(!user)
@@ -45,4 +54,4 @@ const getTodaysCalories = async(userId) => {
     return todayscalories.totalCalories
 }
 
-module.exports = {updateCalories, getTodaysCalories, getCalorieGoal, updateCalorieGoal}
+module.exports = {updateCalories, getTodaysCalories, getCalorieGoal, updateCalorieGoal, getCalorieHistory}

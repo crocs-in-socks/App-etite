@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Cookies from 'js-cookie'
+
+import CalorieHistoryCard from '../components/CalorieHistoryCard'
+import TodayCalorieHistory from '../components/TodayCalorieHistory'
 
 function CalorieTracker() {
 
@@ -7,6 +11,12 @@ function CalorieTracker() {
   const [calorieGoal, setCalorieGoal] = useState(2000)
   const [newGoal, setNewGoal] = useState(2000)
   const [foodConsumed, setFoodConsumed] = useState('')
+  const [calorieHistory, setCalorieHistory] = useState([])
+  const [todaysFood, setTodaysFood] = useState([])
+
+  const fetchtodaysfood = async () => {
+    setTodaysFood(Cookies.get('todaysfood')?.split(',').map(item => item.trim()) || []);
+  }
 
   const fetchCalorieGoal = async()=>{
     try {
@@ -18,21 +28,34 @@ function CalorieTracker() {
         console.error(error);
     }
   }
+  const fetchCalorieHistory = async() => {
+    try {
+      const response = await axios.get('/caloriehistory');
+      if (response.status === 200) {
+          setCalorieHistory(response.data)
+      }
+    } catch (error) {
+        console.error(error);
+    }
+  }
+  const fetchCalories = async () => {
+    try {
+        const response = await axios.get('/calories');
+        if (response.status === 200) {
+            SetCalories(response.data.calories);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchCalories = async () => {
-        try {
-            const response = await axios.get('/calories');
-            if (response.status === 200) {
-                SetCalories(response.data.calories);
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    
     
     fetchCalorieGoal()
     fetchCalories();
+    fetchCalorieHistory()
+    fetchtodaysfood()
 }, []);
 
 
@@ -40,8 +63,13 @@ function CalorieTracker() {
     e.preventDefault()
     try{
         const response = await axios.post('/calories',{foodConsumed})
-        //SetCalories(calories + response.data[0].calories)
-        //console.log(response.data[0].calories)
+
+        const todaysfood = Cookies.get('todaysfood');
+        const newFoodConsumed = todaysfood ? `${foodConsumed}, ${todaysfood}` : foodConsumed;
+
+        const endOfDay = new Date();
+        endOfDay.setHours(23, 59, 59, 999);
+        Cookies.set('todaysfood', newFoodConsumed, { expires: endOfDay });
 
         const getresponse = await axios.get('/calories')
         if(getresponse.status === 200)
@@ -49,6 +77,8 @@ function CalorieTracker() {
           SetCalories(getresponse.data.calories)
         }
         console.log(getresponse.data.calories)
+
+        fetchtodaysfood()
     }
     catch(e)
     {
@@ -84,9 +114,17 @@ function CalorieTracker() {
               <input placeholder='Enter new calorie goal' onChange={(e) => setNewGoal(e.target.value)}></input>
               <button type='submit' >Update Calorie goal</button>
             </form>
+            <p>What you've eaten today</p>
+            <div>
+                {todaysFood.map((item, index) => (
+                  <TodayCalorieHistory key={index} food={item} />
+                ))}
+            </div>
             <p>How much you've eaten before</p>
             <div>
-
+                {calorieHistory.map((item, index) => (
+                  <CalorieHistoryCard key={index} date={item.date} calories={item.totalCalories} />
+                ))}
             </div>
         </div>
     </div>
