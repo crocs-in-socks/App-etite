@@ -51,8 +51,13 @@ const getNextQuestion = async (criteriaArray) => {
             return {nextquestion: 'done', done: true, suggestions: suggestions}
         }
 
-        const attributes = Object.keys(filteredData['0'])
+        let attributes = Object.keys(filteredData['0'])
+        const attrToRemove = criteriaArray.map(food => Object.keys(food)[0])
+        attributes = attributes.filter(attr => !attrToRemove.includes(attr))
         attributes.shift()
+
+        console.log(criteriaArray)
+        console.log(attributes)
 
         const counts = {}
         for (const attr of attributes) {
