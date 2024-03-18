@@ -1,0 +1,17 @@
+.arrow-svg {
+	max-width: 1.2rem;
+	margin-right: 0.2rem;
+}
+
+.back-button {
+	display: flex;
+	min-width: 5rem;
+	align-items: center;
+	justify-content: center;
+	transition: color 0.2s;
+	color: var(--link-blue);
+}
+
+.back-button:hover {
+	cursor: pointer;
+}
