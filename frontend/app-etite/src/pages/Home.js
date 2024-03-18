@@ -6,6 +6,10 @@ import CameraComponent from '../components/CameraComponent'
 import ImageDisplay from '../components/ImageDisplay'
 
 function Home() {
+
+    const [search,setSearch] = useState('food')
+    const [searchRecipes, setSearchRecipes] = useState('chicken')
+
     const navigate = useNavigate()
     const handleLogout = async () => {
         try {
@@ -33,6 +37,14 @@ function Home() {
     const handleCapture = (imageData) => {
       setCapturedImage(imageData)
     }
+    const routeToNutrition = (e) => {
+      e.preventDefault()
+      navigate('/nutrition/' + search)
+    }
+    const routeToRecipe = (e) => {
+      e.preventDefault()
+      navigate('/recipe/' + searchRecipes)
+    }
 
     return (
         <div>Home
@@ -40,6 +52,16 @@ function Home() {
             <ImageDisplay imageData={capturedImage} />
             <button onClick={sendToBackend}>Upload Image</button>
             <button onClick={handleLogout}>Logout</button>
+            <p>Looking for Nutritional Info?</p>
+            <form onSubmit={routeToNutrition}>
+              <input placeholder='Search for specific food...' onChange={(e) => setSearch(e.target.value)}></input>
+              <button type='submit'>search</button>
+            </form>
+            <p>Looking for recipes?</p>
+            <form onSubmit={routeToRecipe}>
+              <input placeholder='Enter space separated ingredients..' onChange={(e) => setSearchRecipes(e.target.value)}></input>
+              <button type='submit'>search</button>
+            </form>
         </div>
   )
 }

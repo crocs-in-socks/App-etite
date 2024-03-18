@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 const jwt = require('jsonwebtoken');
+const axios = require('axios')
 require('dotenv').config()
 
 const {signup, login} = require('./routers/userRouter')
@@ -68,6 +69,21 @@ app.post('/calories', verifyToken, async(req,res) => {
         res.status(400).send(e.message)
     }
 })
+app.get('/imagesearch',verifyToken,async (req,res) => {
+    try{
+        const food = req.query.food
+        const api = process.env.PIXABAYAPI
+        
+        const URL = "https://pixabay.com/api/?key="+api+"&q="+encodeURIComponent(food)
+        //console.log(URL)
+        const response = await axios.get(URL)
+        res.status(200).json(response.data.hits[0].webformatURL)
+    }
+    catch(e)
+    {
+        res.status(400).send(e.message)
+    }
+})
 app.get('/calories',verifyToken, async (req,res) => {
     try{
         
@@ -86,6 +102,28 @@ app.get('/foodcalorie',verifyToken,async(req,res) => {
         const food = req.query.food
         const response = await getNutrition(food)
         res.status(200).json(response.items[0].calories)
+    }
+    catch(e)
+    {
+        res.status(400).send(e.message)
+    }
+})
+app.get('/nutrition',verifyToken,async(req,res) => {
+    try{
+        const food = req.query.food
+        const response = await getNutrition(food)
+        res.status(200).json(response.items[0])
+    }
+    catch(e)
+    {
+        res.status(400).send(e.message)
+    }
+})
+app.get('/caloriehistory',verifyToken,async(req,res)=>{
+    try{
+        const userId = req.userId
+        const response = await getCalorieHistory(userId)
+        res.status(200).json(response)
     }
     catch(e)
     {
@@ -127,6 +165,46 @@ app.get('/caloriegoal',verifyToken, async(req,res)=>{
     catch(e)
     {
         res.status(400).send(e.message)
+    }
+})
+app.get('/recipe',verifyToken, async(req,res)=>{
+    try{
+        const q = req.query.q
+
+        // const response = await axios.get('https://api.spoonacular.com/recipes/findByIngredients',{
+        //     params: {
+        //         ingredients : q,
+        //         apiKey: process.env.SPOONACULAR_API,
+        //         number: 5
+        //     }
+        // })
+        const response = await axios.get('https://api.edamam.com/api/recipes/v2',{
+            params: {
+                type: 'public',
+                q: q,
+                app_id: process.env.EDAMAME_APPID,
+                app_key: process.env.EDAMAME_KEY,
+            }
+        })
+
+
+        const firstFiveHits = response.data.hits.slice(0, 5)
+        //console.log(firstFiveHits[0].recipe)
+        const newArray = []
+        firstFiveHits.map((item) => {
+            const newObj = {
+                label : item.recipe.label,
+                image : item.recipe.image,
+                recipe: item.recipe.ingredientLines.join()
+            }
+            newArray.push(newObj)
+        })
+        //console.log(newArray)
+
+        res.status(200).json(newArray)
+    }catch(e)
+    {
+        res.status(400).send()
     }
 })
 

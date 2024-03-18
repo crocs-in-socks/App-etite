@@ -1,0 +1,33 @@
+.signup-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 1rem;
+	padding-top: 1rem;
+
+	min-height: 70dvh;
+}
+
+.signup-form h1 {
+	padding-top: 3rem;
+}
+
+.back-button {
+	align-self: flex-start;
+}
+
+.signup-form__form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	gap: 1rem;
+}
+
+@media (max-width: 1200px) {
+	.signup-form h1 {
+		font-size: 2.074rem;
+	}
+}

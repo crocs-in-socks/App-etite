@@ -7,15 +7,26 @@
 
 :root {
 	--background-color: black;
-	--background-color-light: #505050;
+	--background-color-light: #303030;
 	--text-color: white;
+	--border-color: rgba(255, 255, 255, 0.8);
+	--link-blue: #1DA1F2;
 	
-	--accent-gradient: linear-gradient(#D56676, #8D38A4, #5182ED);
+	/* --accent-gradient: linear-gradient(#D56676, #8D38A4, #5182ED); */
+	--accent-gradient: linear-gradient(135deg, #fd9b00,#ff0501, #fd9b00);
+
+	--h1-font: 2.986rem;
+	--h2-font: 2.488rem;
+	--h3-font: 2.074rem;
+	--h4-font: 1.728rem;
+	--h5-font: 1.44rem;
 }
 
 body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	background-color: var(--background-color);
+	color: var(--text-color);
 }
 
 .h1-sizing {
@@ -32,4 +43,72 @@ body {
 
 .h4-sizing {
 	font-size: 1.728rem;
+}
+
+.responsive-container {
+	/* border: 1px solid hotpink; */
+
+	width: 1200px;
+	margin: auto;
+}
+
+.gradient-text {
+	background-image: var(--accent-gradient);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+input[type="text"],
+input[type="password"] {
+    background-color: var(--background-color-light);
+	color: var(--text-white);
+	border: none;
+
+	border-radius: 12px;
+	padding: 1rem 2rem;
+	font-size: 1rem;
+}
+
+.gradient-button {
+	padding: 0.5rem 1.5rem;
+	border-radius: 12px;
+	font-weight: 600;
+	color: var(--text-white);
+	border: none;
+	background-image: var(--accent-gradient);
+	background-size: 300%;
+	background-position: left;
+	transition: background-position 1s;
+}
+
+.gradient-button:hover {
+	background-position: right;
+	cursor: pointer;
+}
+
+.gradient-button:active {
+	transform: scale(0.99);
+}
+
+.highlight-green {
+	color: #089000;
+}
+
+.highlight-yellow {
+	color: #ffe200;
+}
+
+.highlight-red {
+	color: #c30101;
+}
+
+.highlight-orange {
+	color: #fd9b00;
+}
+
+@media (max-width: 1220px) {
+	.responsive-container {
+		width: 350px;
+	}
 }
