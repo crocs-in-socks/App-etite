@@ -3,6 +3,10 @@
 	margin-right: 0.2rem;
 }
 
+a {
+	text-decoration: none;
+}
+
 .back-button {
 	display: flex;
 	min-width: 5rem;
