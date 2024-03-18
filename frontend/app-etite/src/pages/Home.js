@@ -28,7 +28,8 @@ function Home() {
     const sendToBackend = async () => {
       try {
         const response = await axios.post('http://127.0.0.1:8000/infer_classifier/', {image: capturedImage})
-        console.log(response)
+        //console.log(response.data.prediction)
+        navigate('/nutrition/' + response.data.prediction)
       }
       catch(error) {
         console.log(error)

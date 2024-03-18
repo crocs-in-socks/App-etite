@@ -9,6 +9,7 @@ require('dotenv').config()
 const {signup, login} = require('./routers/userRouter')
 const {getNutrition} = require('./routers/externalapi')
 const {updateCalories, getTodaysCalories, updateCalorieGoal, getCalorieGoal, getCalorieHistory} = require('./routers/calorieRouter')
+const {getNextQuestion} = require('./routers/quizRouter')
 
 //const cors = require('cors');
 
@@ -169,14 +170,6 @@ app.get('/caloriegoal',verifyToken, async(req,res)=>{
 app.get('/recipe',verifyToken, async(req,res)=>{
     try{
         const q = req.query.q
-
-        // const response = await axios.get('https://api.spoonacular.com/recipes/findByIngredients',{
-        //     params: {
-        //         ingredients : q,
-        //         apiKey: process.env.SPOONACULAR_API,
-        //         number: 5
-        //     }
-        // })
         const response = await axios.get('https://api.edamam.com/api/recipes/v2',{
             params: {
                 type: 'public',
@@ -204,9 +197,20 @@ app.get('/recipe',verifyToken, async(req,res)=>{
     }catch(e)
     {
         res.status(400).send()
+        console.log(e.message)
     }
 })
 
+app.get('/getnextquestion', verifyToken, async(req, res)=>{
+    try {
+        const answers = req.query.answers
+        const response = await getNextQuestion(answers)
+        res.status(200).json(response)
+    }
+    catch(e) {
+        res.status(400).send(e.message)
+    }
+})
 
 app.post('/login', async (req, res) => {
     try {
