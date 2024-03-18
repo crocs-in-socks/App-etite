@@ -13,10 +13,12 @@ function Recipe({name,imgSrc,recipe}) {
   },[])
     
   return (
-    <div>
-        <p>Name: {dishname}</p>
-        <img src={img}></img>
-        <p>Recipe: {dishrecipe }</p>
+    <div className="recipe-card">
+        <img className="recipe-card__img" src={img}></img>
+		<div className="recipe-card__desc">
+			<p className="recipe-card__name">{dishname}</p>
+			<p className="recipe-card__recipe">{dishrecipe }</p>
+		</div>
     </div>
   )
 }

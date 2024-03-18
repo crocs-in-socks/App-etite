@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 
 import Recipe from '../components/Recipe';
+import BackButton from "../components/BackButton.js"
+
+import "../styles/RecipePage.css"
 
 function RecipePage() {
 
@@ -32,11 +35,15 @@ function RecipePage() {
   },[])
 
   return (
-    <div>
-        {query}
-        {recipes.map((item, index) => (
-			<Recipe key={index} name={item.label} imgSrc={item.image} recipe={item.recipe}/>
-		))}
+    <div className="responsive-container recipe-page">
+		<BackButton />
+		<h1 className="h2-sizing gradient-text">Recipes</h1>
+
+		<div className="recipe-cards-group">
+			{recipes.map((item, index) => (
+				<Recipe key={index} name={item.label} imgSrc={item.image} recipe={item.recipe}/>
+			))}
+		</div>
     </div>
   )
 }
