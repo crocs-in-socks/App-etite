@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 const jwt = require('jsonwebtoken');
+const axios = require('axios')
 require('dotenv').config()
 
 const {signup, login} = require('./routers/userRouter')
@@ -67,6 +68,21 @@ app.post('/calories', verifyToken, async(req,res) => {
         res.status(400).send(e.message)
     }
 })
+app.get('/imagesearch',verifyToken,async (req,res) => {
+    try{
+        const food = req.query.food
+        const api = process.env.PIXABAYAPI
+        
+        const URL = "https://pixabay.com/api/?key="+api+"&q="+encodeURIComponent(food)
+        console.log(URL)
+        const response = await axios.get(URL)
+        res.status(200).json(response.data.hits[0].webformatURL)
+    }
+    catch(e)
+    {
+        res.status(400).send(e.message)
+    }
+})
 app.get('/calories',verifyToken, async (req,res) => {
     try{
         
@@ -85,6 +101,28 @@ app.get('/foodcalorie',verifyToken,async(req,res) => {
         const food = req.query.food
         const response = await getNutrition(food)
         res.status(200).json(response.items[0].calories)
+    }
+    catch(e)
+    {
+        res.status(400).send(e.message)
+    }
+})
+app.get('/nutrition',verifyToken,async(req,res) => {
+    try{
+        const food = req.query.food
+        const response = await getNutrition(food)
+        res.status(200).json(response.items[0])
+    }
+    catch(e)
+    {
+        res.status(400).send(e.message)
+    }
+})
+app.get('/caloriehistory',verifyToken,async(req,res)=>{
+    try{
+        const userId = req.userId
+        const response = await getCalorieHistory(userId)
+        res.status(200).json(response)
     }
     catch(e)
     {
