@@ -64,21 +64,22 @@ function Home() {
 
 			
 			<div className="homepage-info-left">	
-				<CameraComponent onCapture={handleCapture} />
 				<ImageDisplay imageData={capturedImage} />
+				<CameraComponent onCapture={handleCapture} />
 				{uploadImageButton()}
 			</div>
             
             <div className="homepage-info-right">
-				<p>Looking for Nutritional Info?</p>
 				<form onSubmit={routeToNutrition}>
-				<input placeholder='Search for specific food' onChange={(e) => setSearch(e.target.value)}></input>
-				<button type='submit'>search</button>
+					<h2 className="input-subtitle h4-sizing">Looking for nutritional info?</h2>
+					<input id="fod-inp" type="text" placeholder='Search for food' onChange={(e) => setSearch(e.target.value)}></input>
+					<button className="gradient-button" type='submit'>Search</button>
 				</form>
-				<p>Looking for recipes?</p>
+
 				<form onSubmit={routeToRecipe}>
-				<input placeholder='Enter space separated ingredients' onChange={(e) => setSearchRecipes(e.target.value)}></input>
-				<button type='submit'>search</button>
+					<h2 className="input-subtitle h4-sizing">Looking for recipes?</h2>
+					<input id="ing-inp" type="text" placeholder='Enter ingredients' onChange={(e) => setSearchRecipes(e.target.value)}></input>
+					<button className="gradient-button" type='submit'>Search</button>
 				</form>
 			</div>
             
