@@ -103,6 +103,10 @@ input[type="password"] {
 	color: #c30101;
 }
 
+.highlight-orange {
+	color: #fd9b00;
+}
+
 @media (max-width: 1220px) {
 	.responsive-container {
 		width: 350px;
