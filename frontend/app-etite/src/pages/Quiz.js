@@ -81,9 +81,11 @@ function Quiz() {
     }, [currQid])
 
     useEffect(()=>{
-        if(isDone)
-        {
+        if(isDone && suggestions.length != 0) {
             navigate('/nutrition/' + suggestions[0])
+        }
+        else {
+            navigate('/nutrition/waffles')
         }
     },[isDone])
 
