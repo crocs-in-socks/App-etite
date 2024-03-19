@@ -86,9 +86,10 @@ function Home() {
 
   function uploadFileButton() {
     return (
-      <div>
-        <input type='file' onChange={handleFileChange} />
-      </div>
+		<label className="file-upload-label gradient-button">
+			Upload from storage
+			<input className="file-upload-input" type='file' onChange={handleFileChange} />
+		</label>
     )
   }
 

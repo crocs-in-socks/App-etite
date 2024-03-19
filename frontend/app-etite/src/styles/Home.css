@@ -93,6 +93,10 @@
 	gap: 1rem;
 }
 
+.file-upload-input {
+	display: none;
+}
+
 @media (max-width: 1220px) {
 	.header-group h1 {
 		font-size: var(--h3-font);
