@@ -42,6 +42,10 @@ function SignUp() {
     }
   }
 
+  function handleNavigate() {
+	navigate("/login")
+  }
+
   return (
     <div className="responsive-container signup-form">
 		{/* <BackButton /> */}
@@ -49,10 +53,11 @@ function SignUp() {
 		<h1 className="h2-sizing gradient-text">Sign up for App-etite</h1>
 
         <form onSubmit={handleSubmit} className="signup-form__form">
-            <input type="text" placeholder="username" onChange={(e)=>setUsername(e.target.value)}></input>
-            <input type="password" placeholder="password" onChange={(e)=>setPassword(e.target.value)}></input>
-            <input type="password" placeholder='re-enter password'onChange={(e)=>setRepassword(e.target.value)}></input>
-            <button className="gradient-button" type='submit'>Signup</button>
+            <input required type="text" placeholder="username" onChange={(e)=>setUsername(e.target.value)}></input>
+            <input required type="password" placeholder="password" onChange={(e)=>setPassword(e.target.value)}></input>
+            <input required type="password" placeholder='re-enter password'onChange={(e)=>setRepassword(e.target.value)}></input>
+			<a onClick={handleNavigate} className="blue-text-link">Already have an account? Log in</a>
+            <button className="gradient-button" type='submit'>Signup for App-etite</button>
         </form>
     </div>
   )

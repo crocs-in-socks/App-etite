@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
+import "../styles/Quiz.css"
+
+import BackButton from "../components/BackButton.js"
+
 function Quiz() {
 
     const navigate = useNavigate()
@@ -84,12 +88,17 @@ function Quiz() {
     },[isDone])
 
     return (
-      <div>
-          <p>Question</p>
-          <p>{question}</p>
-          {!isDone && <button onClick={handleTrue}>Yes</button>}
-          {!isDone && <button onClick={handleFalse}>No</button>}
-          <p>{suggestions}</p>
+      <div className="responsive-container quiz-container">
+			<BackButton />
+			<h1 className="section-title gradient-text h2-sizing">Food-inator</h1>
+			<p className="quiz-question">{question}</p>
+			
+			<div class="quiz-button-group">
+				{!isDone && <button className="quiz-button quiz-button-yes" onClick={handleTrue}>Yes</button>}
+				{!isDone && <button className="quiz-button quiz-button-no" onClick={handleFalse}>No</button>}
+			</div>
+
+			{/* <p>{suggestions}</p> */}
       </div>
     )
 }

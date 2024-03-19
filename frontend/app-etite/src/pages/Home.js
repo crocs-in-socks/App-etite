@@ -53,6 +53,14 @@ function Home() {
 		return <button className="gradient-button" onClick={sendToBackend}>Upload Image</button>
 	}
 
+	function handleNavigate() {
+		navigate("/track")
+	}
+
+	function handleNavigate2() {
+		navigate("/quiz")
+	}
+
     return (
         <div className="responsive-container homepage">
 			<div className="header-group">
@@ -72,20 +80,26 @@ function Home() {
             <div className="homepage-info-right">
 				<form onSubmit={routeToNutrition}>
 					<h2 className="input-subtitle h4-sizing">Looking for nutritional info?</h2>
-					<input id="fod-inp" type="text" placeholder='Search for food' onChange={(e) => setSearch(e.target.value)}></input>
+					<input required id="fod-inp" type="text" placeholder='Search for food' onChange={(e) => setSearch(e.target.value)}></input>
 					<button className="gradient-button" type='submit'>Search</button>
 				</form>
 
 				<form onSubmit={routeToRecipe}>
 					<h2 className="input-subtitle h4-sizing">Looking for recipes?</h2>
-					<input id="ing-inp" type="text" placeholder='Enter ingredients' onChange={(e) => setSearchRecipes(e.target.value)}></input>
+					<input required id="ing-inp" type="text" placeholder='Enter ingredients' onChange={(e) => setSearchRecipes(e.target.value)}></input>
 					<button className="gradient-button" type='submit'>Search</button>
 				</form>
 
-				<div>
+				<div className="title-button">
 					<h2 className="input-subtitle h4-sizing">View your calorie history</h2>
-					<button onClick={navigate("/track")} className="gradient-button">Calorie Tracking</button>
+					<button onClick={handleNavigate} className="gradient-button">Calorie Tracking</button>
 				</div>
+
+				<div className="title-button">
+					<h2 className="input-subtitle h4-sizing">Don't know what to eat?</h2>
+					<button onClick={handleNavigate2} className="gradient-button">Check out the Food Recommendation Quiz</button>
+				</div>
+
 			</div>
             
 			</div>

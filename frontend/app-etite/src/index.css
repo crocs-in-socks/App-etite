@@ -59,6 +59,16 @@ body {
 	color: transparent;
 }
 
+.blue-text-link {
+	color: var(--link-blue);
+	font-size: 0.9rem;
+}
+
+.blue-text-link:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
 input[type="text"],
 input[type="password"] {
     background-color: var(--background-color-light);
@@ -135,7 +145,7 @@ input[type="password"] {
 	height: 100vh;
 	width: 100vw;
 	backdrop-filter: blur(50px);
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(0, 0, 0, 0.6);
 	z-index: -1;
 }
 

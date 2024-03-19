@@ -22,7 +22,7 @@
 	/* border: 2px solid var(--border-color); */
 
 	display: flex;
-	align-items: center;
+	align-items: top;
 	justify-content: center;
 
 	gap: 3rem;
@@ -36,7 +36,7 @@
 }
 
 .recipe-card__name {
-	font-size: 1.2rem;
+	font-size: 1.3rem;
 	font-weight: 600;
 	margin-bottom: 0.2rem;
 }

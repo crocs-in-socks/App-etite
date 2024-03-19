@@ -27,6 +27,10 @@ function Login() {
     }
   }
 
+  function handleNavigate() {
+	navigate("/signup")
+  }
+
   return (
     <div className="responsive-container login-form">
 		{/* <BackButton /> */}
@@ -34,8 +38,9 @@ function Login() {
 		<h1 className="h2-sizing gradient-text">Login to App-etite</h1>
 
 		<form className="login-form__form" onSubmit={handleSubmit}>
-			<input type='text' placeholder='username' onChange={(e)=>setUsername(e.target.value)}></input>
-			<input type='password' placeholder='password' onChange={(e)=>setPassword(e.target.value)}></input>
+			<input required type='text' placeholder='username' onChange={(e)=>setUsername(e.target.value)}></input>
+			<input required type='password' placeholder='password' onChange={(e)=>setPassword(e.target.value)}></input>
+			<a onClick={handleNavigate} className="blue-text-link">Don't have an account? Sign up</a>
 			<button className="gradient-button login-button" >Login to App-etite</button>
 		</form>
 	</div>
