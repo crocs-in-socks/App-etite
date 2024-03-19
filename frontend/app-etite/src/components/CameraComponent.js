@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 
-function CameraComponent({onCapture, uploadButton}) {
+function CameraComponent({onCapture, uploadButton, uploadFileButton}) {
     const [stream, setStream] = useState(null)
     const [showStartButton, setShowStartButton] = useState(true)
 	const [videoOn, setVideoOn] = useState(false)
@@ -58,6 +58,7 @@ function CameraComponent({onCapture, uploadButton}) {
 			<div className="image-buttons-row">
 				{showStartButton && <button className="gradient-button" onClick={startCamera}>Open Camera</button>}
 				{uploadButton()}
+                {uploadFileButton()}
 				{stream && <button className="gradient-button" onClick={takePicture}>Take Picture</button>}
 			</div>
         </div>
