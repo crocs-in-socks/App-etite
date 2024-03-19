@@ -84,7 +84,7 @@ function Quiz() {
         if(isDone && suggestions.length != 0) {
             navigate('/nutrition/' + suggestions[0])
         }
-        else {
+        else if(isDone) {
             navigate('/nutrition/waffles')
         }
     },[isDone])
