@@ -27,6 +27,45 @@ const countTrueAttributes = async(data, attribute) => {
     return count
 }
 
+// const getNextQuestion = async (criteriaArray) => {
+//     try {
+//         const data = await loadDatabase()
+
+//         const filteredData = Object.values(data).filter(food => {
+//             return criteriaArray.every(criteria => {
+//                 const key = Object.keys(criteria)[0]
+//                 return food[key] === Object.values(criteria)[0]
+//             })
+//         })
+
+//         const numFoods = Object.keys(filteredData).length
+
+//         if(numFoods == 1) {
+//             const values = Object.values(filteredData)
+//             let suggestions = []
+//             for(const value in values) {
+//                 const food = filteredData[value]
+//                 const food_key = Object.keys(food)[0]
+//                 suggestions.push(food[food_key])
+//             }
+//             return {nextquestion: 'done', done: true, suggestions: suggestions}
+//         }
+//         else if(numFoods == 0) {
+//             return {nextquestion: 'done', done: true, suggestions: []}
+//         }
+
+//         let attributes = Object.keys(filteredData['0'])
+//         const attrToRemove = criteriaArray.map(food => Object.keys(food)[0])
+//         attributes = attributes.filter(attr => !attrToRemove.includes(attr))
+//         attributes.shift()
+
+//         return {nextquestion: attributes[0], done: false, suggestions: []}
+//     }
+//     catch(error) {
+//         console.error('Error loading database:', error)
+//     }
+// }
+
 const getNextQuestion = async (criteriaArray) => {
     try {
         const data = await loadDatabase()
