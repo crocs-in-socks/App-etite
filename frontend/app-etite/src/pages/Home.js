@@ -58,6 +58,15 @@ function Home() {
       }
     }
 
+    const sendToBackend = async () => {
+      if(file) {
+        handleFileSubmit()
+      }
+      else {
+        sendCaptureToBackend()
+      }
+    }
+
     const [capturedImage, setCapturedImage] = useState(null)
     const handleCapture = (imageData) => {
       setCapturedImage(imageData)
@@ -72,14 +81,13 @@ function Home() {
     }
 
 	function uploadImageButton() {
-		return <button className="gradient-button" onClick={sendCaptureToBackend}>Upload Captured Image</button>
+		return <button className="gradient-button" onClick={sendToBackend}>Upload Image</button>
 	}
 
   function uploadFileButton() {
     return (
       <div>
         <input type='file' onChange={handleFileChange} />
-        <button onClick={handleFileSubmit}>Upload Image File</button>
       </div>
     )
   }
