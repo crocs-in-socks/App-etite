@@ -12,6 +12,7 @@ function Home() {
     const [search,setSearch] = useState('food')
     const [searchRecipes, setSearchRecipes] = useState('chicken')
     const [file, setFile] = useState(null)
+    const [checkUpload, setCheckUpload] = useState(null)
 
     const navigate = useNavigate()
     const handleLogout = async () => {
@@ -39,6 +40,7 @@ function Home() {
 
     const handleFileChange = (event) => {
       setFile(event.target.files[0])
+      setCheckUpload('file')
     }
 
     const handleFileSubmit = async () => {
@@ -59,7 +61,7 @@ function Home() {
     }
 
     const sendToBackend = async () => {
-      if(file) {
+      if(checkUpload == 'file') {
         handleFileSubmit()
       }
       else {
@@ -70,6 +72,7 @@ function Home() {
     const [capturedImage, setCapturedImage] = useState(null)
     const handleCapture = (imageData) => {
       setCapturedImage(imageData)
+      setCheckUpload('capture')
     }
     const routeToNutrition = (e) => {
       e.preventDefault()
