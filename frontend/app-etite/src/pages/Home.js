@@ -11,6 +11,7 @@ function Home() {
 
     const [search,setSearch] = useState('food')
     const [searchRecipes, setSearchRecipes] = useState('chicken')
+    const [file, setFile] = useState(null)
 
     const navigate = useNavigate()
     const handleLogout = async () => {
@@ -25,7 +26,7 @@ function Home() {
         }
     }
 
-    const sendToBackend = async () => {
+    const sendCaptureToBackend = async () => {
       try {
         const response = await axios.post('http://127.0.0.1:8000/infer_classifier/', {image: capturedImage})
         //console.log(response.data.prediction)
@@ -34,7 +35,28 @@ function Home() {
       catch(error) {
         console.log(error)
       }
-  }
+    }
+
+    const handleFileChange = (event) => {
+      setFile(event.target.files[0])
+    }
+
+    const handleFileSubmit = async () => {
+      const formData = new FormData()
+      formData.append('image', file)
+
+      try {
+        const response = await axios.post('http://127.0.0.1:8000/infer_classifier/', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        navigate('/nutrition/' + response.data.prediction)
+      }
+      catch (error) {
+        console.error('Error uploading file:', error)
+      }
+    }
 
     const [capturedImage, setCapturedImage] = useState(null)
     const handleCapture = (imageData) => {
@@ -50,8 +72,17 @@ function Home() {
     }
 
 	function uploadImageButton() {
-		return <button className="gradient-button" onClick={sendToBackend}>Upload Image</button>
+		return <button className="gradient-button" onClick={sendCaptureToBackend}>Upload Captured Image</button>
 	}
+
+  function uploadFileButton() {
+    return (
+      <div>
+        <input type='file' onChange={handleFileChange} />
+        <button onClick={handleFileSubmit}>Upload Image File</button>
+      </div>
+    )
+  }
 
 	function handleNavigate() {
 		navigate("/track")
@@ -73,7 +104,7 @@ function Home() {
 			
 			<div className="homepage-info-left">	
 				<ImageDisplay imageData={capturedImage} />
-				<CameraComponent uploadButton={uploadImageButton} onCapture={handleCapture} />
+				<CameraComponent uploadFileButton={uploadFileButton} uploadButton={uploadImageButton} onCapture={handleCapture} />
 				{/* {uploadImageButton()} */}
 			</div>
             
