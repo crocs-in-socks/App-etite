@@ -73,7 +73,7 @@
 
 	gap: 1.5rem;
 
-	padding-bottom: 5rem;
+	padding-bottom: 1rem;
 }
 
 .input-subtitle {
@@ -84,6 +84,13 @@
 	padding: 0.6rem 1rem;
 	width: 20rem;
 	margin-right: 0.5rem;
+}
+
+.image-buttons-row {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
 }
 
 @media (max-width: 1220px) {

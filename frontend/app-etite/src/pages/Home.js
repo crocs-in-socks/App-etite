@@ -73,8 +73,8 @@ function Home() {
 			
 			<div className="homepage-info-left">	
 				<ImageDisplay imageData={capturedImage} />
-				<CameraComponent onCapture={handleCapture} />
-				{uploadImageButton()}
+				<CameraComponent uploadButton={uploadImageButton} onCapture={handleCapture} />
+				{/* {uploadImageButton()} */}
 			</div>
             
             <div className="homepage-info-right">

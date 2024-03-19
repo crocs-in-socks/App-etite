@@ -90,7 +90,7 @@ function Quiz() {
     return (
       <div className="responsive-container quiz-container">
 			<BackButton />
-			<h1 className="section-title gradient-text h2-sizing">Food-inator</h1>
+			<h1 className="section-title gradient-text h2-sizing">Food Recommendation Quiz</h1>
 			<p className="quiz-question">{question}</p>
 			
 			<div class="quiz-button-group">
