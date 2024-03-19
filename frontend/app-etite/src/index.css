@@ -7,7 +7,7 @@
 
 :root {
 	--background-color: black;
-	--background-color-light: #303030;
+	--background-color-light: rgba(48, 48, 48, 0.5);
 	--text-color: white;
 	--border-color: rgba(255, 255, 255, 0.8);
 	--link-blue: #1DA1F2;
@@ -101,7 +101,7 @@ input[type="password"] {
 	background-size: 300%;
 	background-position: left;
 	transition: background-position 1s;
-	font-size: 1.8rem;
+	font-size: 1.4rem;
 }
 
 .highlight-green {
@@ -123,5 +123,49 @@ input[type="password"] {
 @media (max-width: 1220px) {
 	.responsive-container {
 		width: 350px;
+	}
+}
+
+/* Animated background stuff */
+  
+.blur {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	height: 100vh;
+	width: 100vw;
+	backdrop-filter: blur(50px);
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: -1;
+}
+
+.bg {
+	animation:slide 18s ease-in-out infinite alternate;
+	/* background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%); */
+	background-image: linear-gradient(-60deg, #ff0501 50%, #000 50%);
+	bottom:0;
+	left:-50%;
+	opacity:.5;
+	position:fixed;
+	right:-50%;
+	top:0;
+	z-index:-2;
+}
+
+.bg2 {
+	animation-direction:alternate-reverse;
+	animation-duration:19s;
+}
+
+.bg3 {
+	animation-duration:20s;
+}
+
+@keyframes slide {
+	0% {
+		transform:translateX(-25%);
+	}
+	100% {
+		transform:translateX(25%);
 	}
 }

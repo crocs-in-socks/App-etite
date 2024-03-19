@@ -37,7 +37,7 @@
 .greybox {
 	width: 475px;
 	height: 350px;	
-	background-color: var(--background-color-light);
+	background-color: rgba(48, 48, 48, 0.5);
 	border-radius: 12px;
 
 	display: flex;
@@ -71,7 +71,9 @@
 	align-items: left;
 	justify-content: center;
 
-	gap: 1rem;
+	gap: 1.5rem;
+
+	padding-bottom: 7rem;
 }
 
 .input-subtitle {

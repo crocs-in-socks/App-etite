@@ -7,5 +7,5 @@ const ImageDisplay = ({imageData}) => {
         </div>
     )
 }
-
+ 
 export default ImageDisplay

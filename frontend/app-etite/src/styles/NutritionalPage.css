@@ -14,7 +14,7 @@
 }
 
 .food-image {
-	max-width: 475px;
+	max-height: 475px;
 	border-radius: 12px;
 	border: 3px solid var(--border-color);
 }
@@ -47,7 +47,7 @@
 	}
 
 	.food-image {
-		max-width: 375px;
+		height: 300px;
 	}
 
 	.responsive-left-right {

@@ -56,7 +56,7 @@ function Home() {
     return (
         <div className="responsive-container homepage">
 			<div className="header-group">
-				<h1 className="h2-sizing gradient-text">App-etite</h1>
+				<a href="/"><h1 className="h2-sizing gradient-text">App-etite</h1></a>
 				<a className="logout-button" onClick={handleLogout}>Logout</a>
 			</div>
 			
@@ -81,6 +81,11 @@ function Home() {
 					<input id="ing-inp" type="text" placeholder='Enter ingredients' onChange={(e) => setSearchRecipes(e.target.value)}></input>
 					<button className="gradient-button" type='submit'>Search</button>
 				</form>
+
+				<div>
+					<h2 className="input-subtitle h4-sizing">View your calorie history</h2>
+					<button onClick={navigate("/track")} className="gradient-button">Calorie Tracking</button>
+				</div>
 			</div>
             
 			</div>

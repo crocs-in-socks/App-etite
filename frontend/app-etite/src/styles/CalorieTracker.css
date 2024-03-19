@@ -6,7 +6,6 @@
 }
 
 .responsive-left-right {
-	/* border: 1px solid hotpink; */
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -24,6 +23,10 @@
 	align-self: left;
 }
 
+.responsive-left {
+	padding-top: 0rem;
+}
+
 .calorie-box {
 	background-image: var(--accent-gradient);
 	padding: 1rem 1rem;
@@ -33,6 +36,8 @@
 	justify-content: center;
 	max-width: 25rem;
 	align-self: center;
+
+	margin-top: 1rem;
 }
 
 .calorie-box__calories {
@@ -80,6 +85,10 @@
 	cursor: wait;
 }
 
+.responsive-right {
+	padding-bottom: 4rem;
+}
+
 .eaten-container {
 	margin-top: 0.4rem;
 	display: flex;
@@ -119,5 +128,9 @@
 	.eaten-subtitle {
 		font-size: var(--h5-font);
 		text-align: center;
+	}
+
+	.eaten-container {
+		margin-left: 0.9rem;
 	}
 }
