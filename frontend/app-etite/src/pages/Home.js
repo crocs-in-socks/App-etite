@@ -30,7 +30,7 @@ function Home() {
     const sendCaptureToBackend = async () => {
       try {
         console.log('Got request to send image to backend.')
-        const response = await axios.post('http://localhost:8000/infer_classifier/', {image: capturedImage})
+        const response = await axios.post('https://app-etite-django-backend.onrender.com/infer_classifier/', {image: capturedImage})
         //console.log(response.data.prediction)
         console.log('recieved response from backend.')
         navigate('/nutrition/' + response.data.prediction)
@@ -50,7 +50,7 @@ function Home() {
       formData.append('image', file)
 
       try {
-        const response = await axios.post('http://localhost:8000/infer_classifier/', formData, {
+        const response = await axios.post('https://app-etite-django-backend.onrender.com/infer_classifier/', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
