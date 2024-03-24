@@ -29,8 +29,10 @@ function Home() {
 
     const sendCaptureToBackend = async () => {
       try {
-        const response = await axios.post('http://127.0.0.1:8000/infer_classifier/', {image: capturedImage})
+        console.log('Got request to send image to backend.')
+        const response = await axios.post('http://localhost:8000/infer_classifier/', {image: capturedImage})
         //console.log(response.data.prediction)
+        console.log('recieved response from backend.')
         navigate('/nutrition/' + response.data.prediction)
       }
       catch(error) {
@@ -48,7 +50,7 @@ function Home() {
       formData.append('image', file)
 
       try {
-        const response = await axios.post('http://127.0.0.1:8000/infer_classifier/', formData, {
+        const response = await axios.post('http://localhost:8000/infer_classifier/', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }

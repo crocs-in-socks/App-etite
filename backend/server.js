@@ -11,14 +11,14 @@ const {getNutrition} = require('./routers/externalapi')
 const {updateCalories, getTodaysCalories, updateCalorieGoal, getCalorieGoal, getCalorieHistory} = require('./routers/calorieRouter')
 const {getNextQuestion} = require('./routers/quizRouter')
 
-//const cors = require('cors');
+const cors = require('cors');
 
 
 
 const app = express()
 app.use(bodyParser.json());
 app.use(cookieParser())
-//app.use(cors());
+app.use(cors({'origin':'http://localhost:3000'}));
 mongoose.connect(process.env.MONGOURL)
 
 //app.get('/', (req, res) => res.send("hello, world!"))

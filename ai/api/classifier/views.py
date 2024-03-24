@@ -44,6 +44,8 @@ with open(food_map_file_path, 'r') as file:
 @csrf_exempt
 def infer_classifier(request):
 
+    print('Request recieved at backend.')
+
     if request.content_type != 'application/json':
         image = request.FILES['image']
         image = Image.open(image).convert('RGB')

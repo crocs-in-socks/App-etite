@@ -1,0 +1,16 @@
+version: '3'
+services:
+  django-backend:
+    build: ./ai/api
+    ports:
+      - "8000:8000"
+  
+  nodejs-backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+  
+  react-frontend:
+    build: ./frontend/app-etite
+    ports:
+      - "3000:3000"

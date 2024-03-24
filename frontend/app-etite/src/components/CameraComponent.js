@@ -17,7 +17,19 @@ function CameraComponent({onCapture, uploadButton, uploadFileButton}) {
                 videoRef.current.srcObject = userMediaStream;
             }
         } catch (error) {
-          console.error('Error accessing camera:', error)
+          console.error('Error accessing back camera:', error)
+          try {
+            const userMediaStream = await navigator.mediaDevices.getUserMedia({ video: {facingMode: 'user'} })
+            setStream(userMediaStream)
+            setShowStartButton(false)
+            onCapture(null)
+            if (videoRef.current) {
+                videoRef.current.srcObject = userMediaStream;
+            }
+          }
+          catch (error) {
+            console.error('Error acccessing front camera:', error)
+          }
         }
     }
 
